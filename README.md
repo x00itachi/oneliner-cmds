@@ -169,3 +169,64 @@ https://test.indiatoday.in
 https://test.myfonts.com
 https://test.ndtv.com
 ```                    
+### To extract particular fields from the output(extracted 2nd and 3rd strings, delimiter='.(dot)')
+```
+┌──(natraj㉿natraj-kali)-[~/Desktop]
+└─$ cat test.html | grep -Po "https?://[^/\"]+" | sort -u | sed -re 's#(https://)#\1test.#'g -e 's#www.##g' | awk -F"." '{print $2,$3}'
+api search
+cc bingj
+consent cmp
+geo yahoo
+guce yahoo
+help yahoo
+in help
+in images
+in mail
+in news
+in search
+in video
+indianexpress com
+legal yahoo
+login yahoo
+s yimg
+sports ndtv
+timesofindia indiatimes
+indiatoday in
+myfonts com
+ndtv com
+```
+### To keep the newline between extracted elements
+```
+┌──(natraj㉿natraj-kali)-[~/Desktop]
+└─$ cat test.html | grep -Po "https?://[^/\"]+" | sort -u | sed -re 's#(https://)#\1test.#'g -e 's#www.##g' | awk -F"." '{print $2 "\n" $3}'
+api
+search
+cc
+bingj
+consent
+cmp
+geo
+yahoo
+guce
+yahoo
+help
+yahoo
+in
+help
+in
+images
+in
+mail
+in
+news
+...
+...
+```
+### Remove blank lines from a file (sed):
+```
+sed '/^$/d' file.txt
+```
+### Extract specific lines between two patterns in a file (awk):
+```
+awk '/start_pattern/,/end_pattern/' file.txt
+```
